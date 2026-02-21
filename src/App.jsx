@@ -4,6 +4,7 @@ import ReviewsPage from "./pages/ReviewsPage"
 import Footer from "./components/Footer"
 import { useState } from "react"
 import CartPage from "./pages/CartPage"
+import QuickActions from "./components/QuickActions"
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
       </Routes>
       <div className="fixed bottom-0 w-full">
         <Footer nav={nav} cartCount={cartCount} setNav={setNav} cartTotal={cartTotal}/>
+      </div>
+      <div className="fixed bottom-0 w-full">
+      <QuickActions/>
       </div>
     </>
   )

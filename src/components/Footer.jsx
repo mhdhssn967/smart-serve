@@ -60,7 +60,7 @@ const Footer = ({ nav, cartCount, setNav, cartTotal }) => {
         <Link to="/cart" className="absolute -top-14 left-4 right-4">
           <div
             onClick={() => setNav("cart")}
-            className="bg-orange-500 rounded-2xl px-4 py-3 flex justify-between items-center cursor-pointer shadow-lg shadow-orange-200"
+            className="bg-orange-500 w-50 rounded-2xl px-4 py-3 flex justify-between items-center cursor-pointer shadow-lg shadow-orange-200"
           >
             <div className="flex items-center gap-2.5">
               <span className="bg-white/25 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">
