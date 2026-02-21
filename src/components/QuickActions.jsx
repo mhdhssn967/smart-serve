@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Droplets, BellRing, Receipt, X, UtensilsCrossed, ChevronUp } from 'lucide-react';
+import { Droplets, BellRing, Receipt, X, UtensilsCrossed } from 'lucide-react';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const COMMON_TAGS = ["Tissue", "Glass", "Plate", "Spoon", "Fork", "Napkin", "Straw", "Toothpick"];
 
@@ -10,7 +12,6 @@ const QuickActions = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const menuRef = useRef(null);
 
-  // Close FAB menu on outside click
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false);
@@ -25,75 +26,6 @@ const QuickActions = () => {
     );
   };
 
-  const handleWater = async () => {
-    setOpen(false);
-    const Swal = (await import("https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js")).default;
-    await Swal.fire({
-      html: `
-        <div style="font-family:'DM Sans',sans-serif;padding:8px 0;">
-          <div style="width:56px;height:56px;background:#eff6ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-          </div>
-          <h2 style="font-size:18px;font-weight:700;color:#111;margin-bottom:8px;">Water Requested!</h2>
-          <p style="font-size:14px;color:#6b7280;line-height:1.6;">A glass of water will arrive at your table shortly.</p>
-        </div>
-      `,
-      showConfirmButton: true,
-      confirmButtonText: "Got it",
-      confirmButtonColor: "#3b82f6",
-      customClass: { popup: "swal-custom-popup", confirmButton: "swal-custom-confirm" },
-      didOpen: () => injectSwalStyles(),
-    });
-  };
-
-  const handleBill = async () => {
-    setOpen(false);
-    const Swal = (await import("https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js")).default;
-    await Swal.fire({
-      html: `
-        <div style="font-family:'DM Sans',sans-serif;padding:8px 0;">
-          <div style="width:56px;height:56px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-          </div>
-          <h2 style="font-size:18px;font-weight:700;color:#111;margin-bottom:8px;">Bill is on its way!</h2>
-          <p style="font-size:14px;color:#6b7280;line-height:1.6;">Your bill will be brought to your table shortly. Thank you for dining with us! 🙏</p>
-        </div>
-      `,
-      showConfirmButton: true,
-      confirmButtonText: "Thank you",
-      confirmButtonColor: "#16a34a",
-      customClass: { popup: "swal-custom-popup", confirmButton: "swal-custom-confirm" },
-      didOpen: () => injectSwalStyles(),
-    });
-  };
-
-  const handleWaiterSubmit = async () => {
-    setWaiterModal(false);
-    const Swal = (await import("https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js")).default;
-    const items = selectedTags.length > 0 ? selectedTags.join(', ') : null;
-    await Swal.fire({
-      html: `
-        <div style="font-family:'DM Sans',sans-serif;padding:8px 0;">
-          <div style="width:56px;height:56px;background:#fff7ed;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e8622a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-          </div>
-          <h2 style="font-size:18px;font-weight:700;color:#111;margin-bottom:8px;">Waiter Notified!</h2>
-          <p style="font-size:14px;color:#6b7280;line-height:1.6;">
-            ${items ? `<strong style="color:#374151;">${items}</strong> — someone will be` : 'Someone will be'} at your table shortly.
-          </p>
-          ${waiterNote ? `<div style="margin-top:12px;background:#fef9f6;border:1px solid #fde4d3;border-radius:10px;padding:10px 12px;font-size:13px;color:#92400e;text-align:left;"><span style="font-weight:600;">Note:</span> ${waiterNote}</div>` : ''}
-        </div>
-      `,
-      showConfirmButton: true,
-      confirmButtonText: "Got it",
-      confirmButtonColor: "#e8622a",
-      customClass: { popup: "swal-custom-popup", confirmButton: "swal-custom-confirm" },
-      didOpen: () => injectSwalStyles(),
-    });
-    setWaiterNote('');
-    setSelectedTags([]);
-  };
-
   const injectSwalStyles = () => {
     if (document.getElementById('swal-custom-style')) return;
     const style = document.createElement('style');
@@ -104,6 +36,98 @@ const QuickActions = () => {
       .swal-custom-confirm { border-radius: 12px !important; font-weight: 600 !important; font-size: 14px !important; padding: 12px 28px !important; }
     `;
     document.head.appendChild(style);
+  };
+
+  const confirmAction = async (title, text, confirmColor) => {
+    const result = await Swal.fire({
+      title,
+      text,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: confirmColor,
+      customClass: {
+        popup: "swal-custom-popup",
+        confirmButton: "swal-custom-confirm",
+      },
+      didOpen: injectSwalStyles,
+    });
+    return result.isConfirmed;
+  };
+
+  const handleWater = async () => {
+    setOpen(false);
+
+    const confirmed = await confirmAction(
+      "Request Water?",
+      "A staff member will bring water to your table.",
+      "#3b82f6"
+    );
+
+    if (!confirmed) return;
+
+    await Swal.fire({
+      html: `
+        <div style="font-family:'DM Sans',sans-serif;padding:8px 0;">
+          <h2 style="font-size:18px;font-weight:700;color:#111;margin-bottom:8px;">Water Requested!</h2>
+          <p style="font-size:14px;color:#6b7280;">A glass of water will arrive shortly.</p>
+        </div>
+      `,
+      confirmButtonText: "Got it",
+      confirmButtonColor: "#3b82f6",
+      customClass: { popup: "swal-custom-popup", confirmButton: "swal-custom-confirm" },
+      didOpen: injectSwalStyles,
+    });
+  };
+
+  const handleBill = async () => {
+    setOpen(false);
+
+    const confirmed = await confirmAction(
+      "Request Bill?",
+      "Your bill will be prepared and brought to your table.",
+      "#16a34a"
+    );
+
+    if (!confirmed) return;
+
+    await Swal.fire({
+      html: `
+        <div style="font-family:'DM Sans',sans-serif;padding:8px 0;">
+          <h2 style="font-size:18px;font-weight:700;color:#111;margin-bottom:8px;">Bill is on its way!</h2>
+          <p style="font-size:14px;color:#6b7280;">Thank you for dining with us! 🙏</p>
+        </div>
+      `,
+      confirmButtonText: "Thank you",
+      confirmButtonColor: "#16a34a",
+      customClass: { popup: "swal-custom-popup", confirmButton: "swal-custom-confirm" },
+      didOpen: injectSwalStyles,
+    });
+  };
+
+  const handleWaiterSubmit = async () => {
+    setWaiterModal(false);
+
+    const items = selectedTags.length > 0 ? selectedTags.join(', ') : null;
+
+    await Swal.fire({
+      html: `
+        <div style="font-family:'DM Sans',sans-serif;padding:8px 0;">
+          <h2 style="font-size:18px;font-weight:700;color:#111;margin-bottom:8px;">Waiter Notified!</h2>
+          <p style="font-size:14px;color:#6b7280;">
+            ${items ? `<strong style="color:#374151;">${items}</strong> — someone will be` : 'Someone will be'} at your table shortly.
+          </p>
+          ${waiterNote ? `<div style="margin-top:12px;background:#fef9f6;border:1px solid #fde4d3;border-radius:10px;padding:10px 12px;font-size:13px;color:#92400e;text-align:left;"><span style="font-weight:600;">Note:</span> ${waiterNote}</div>` : ''}
+        </div>
+      `,
+      confirmButtonText: "Got it",
+      confirmButtonColor: "#e8622a",
+      customClass: { popup: "swal-custom-popup", confirmButton: "swal-custom-confirm" },
+      didOpen: injectSwalStyles,
+    });
+
+    setWaiterNote('');
+    setSelectedTags([]);
   };
 
   const ACTIONS = [
@@ -129,10 +153,7 @@ const QuickActions = () => {
 
   return (
     <>
-      {/* FAB MENU */}
       <div ref={menuRef} className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-2">
-
-        {/* Action buttons — slide up when open */}
         {open && ACTIONS.map((action, i) => (
           <div
             key={action.label}
@@ -154,7 +175,6 @@ const QuickActions = () => {
           </div>
         ))}
 
-        {/* Toggle FAB */}
         <button
           onClick={() => setOpen(o => !o)}
           className={`fab-attention wiggle w-13 h-13 rounded-full shadow-xl flex items-center justify-center transition-all active:scale-90 ${open ? 'bg-gray-800' : 'bg-blue-500'}`}
@@ -167,7 +187,6 @@ const QuickActions = () => {
         </button>
       </div>
 
-      {/* CALL WAITER MODAL */}
       {waiterModal && (
         <>
           <div
@@ -178,11 +197,9 @@ const QuickActions = () => {
             className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-sm bg-white rounded-t-3xl z-50 shadow-2xl"
             style={{ animation: 'slideUp 0.3s cubic-bezier(0.22,1,0.36,1)' }}
           >
-            {/* handle */}
             <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mt-3 mb-1" />
 
             <div className="px-5 pb-8 pt-3">
-              {/* header */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center">
@@ -201,7 +218,6 @@ const QuickActions = () => {
                 </button>
               </div>
 
-              {/* common tags */}
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2.5">Quick Select</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {COMMON_TAGS.map(tag => (
@@ -219,7 +235,6 @@ const QuickActions = () => {
                 ))}
               </div>
 
-              {/* note input */}
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2">Anything else?</p>
               <textarea
                 value={waiterNote}
@@ -229,14 +244,12 @@ const QuickActions = () => {
                 className="w-full text-sm text-gray-700 placeholder-gray-300 resize-none outline-none bg-gray-50 border border-gray-100 focus:border-orange-200 rounded-xl px-3.5 py-3 transition-colors font-light"
               />
 
-              {/* submit */}
               <button
                 onClick={handleWaiterSubmit}
-                disabled={selectedTags.length === 0 && !waiterNote.trim()}
                 className="mt-4 w-full py-3.5 bg-orange-500 disabled:bg-gray-200 disabled:text-gray-400 text-white rounded-2xl text-sm font-semibold flex items-center justify-center gap-2 shadow-md shadow-orange-100 active:scale-95 transition-all"
               >
                 <BellRing size={16} />
-                Notify Waiter
+                {selectedTags.length === 0 && !waiterNote.trim() ? "Call Waiter" : "Notify waiter"}
               </button>
             </div>
           </div>
