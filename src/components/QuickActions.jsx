@@ -157,7 +157,7 @@ const QuickActions = () => {
         {/* Toggle FAB */}
         <button
           onClick={() => setOpen(o => !o)}
-          className={`w-13 h-13 rounded-full shadow-xl flex items-center justify-center transition-all active:scale-90 ${open ? 'bg-gray-800' : 'bg-orange-400'}`}
+          className={`fab-attention wiggle w-13 h-13 rounded-full shadow-xl flex items-center justify-center transition-all active:scale-90 ${open ? 'bg-gray-800' : 'bg-blue-500'}`}
           style={{ width: 52, height: 52 }}
         >
           {open
