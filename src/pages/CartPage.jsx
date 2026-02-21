@@ -171,7 +171,7 @@ export default function CartPage({ cart: initialCart = [], onCartUpdate }) {
   }
 
   return (
-    <div className="font-sans bg-orange-50 min-h-screen mx-auto">
+    <div className="font-sans bg-orange-50 mx-auto">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500;600&display=swap');
         .font-sans { font-family: 'DM Sans', sans-serif; }
@@ -351,7 +351,7 @@ export default function CartPage({ cart: initialCart = [], onCartUpdate }) {
 
       {/* BOTTOM CTA */}
       {cart.length > 0 && (
-        <div className=" w-full max-w  backdrop-blur border-t border-gray-100 z-40 px-8 pt-3 pb-7" style={{marginBottom:'70px'}}>
+        <div className=" w-full max-w backdrop-blur border-t border-gray-100 z-40 px-8 pt-3 pb-7" style={{marginBottom:'120px'}}>
           <div className="flex justify-between items-center mb-3">
             <div>
               <p className="text-xs text-gray-400">Total payable</p>

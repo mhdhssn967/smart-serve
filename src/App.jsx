@@ -3,7 +3,7 @@ import RestaurantHome from "./pages/RestaurantHome"
 import ReviewsPage from "./pages/ReviewsPage"
 import Footer from "./components/Footer"
 import { useState } from "react"
-import CartPage from "./pages/CartPage."
+import CartPage from "./pages/CartPage"
 
 function App() {
 
@@ -19,7 +19,9 @@ function App() {
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/cart" element={<CartPage cart={cart}/>} />
       </Routes>
-      <Footer nav={nav} cartCount={cartCount} setNav={setNav} cartTotal={cartTotal}/>
+      <div className="fixed bottom-0 w-full">
+        <Footer nav={nav} cartCount={cartCount} setNav={setNav} cartTotal={cartTotal}/>
+      </div>
     </>
   )
 }
