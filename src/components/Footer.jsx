@@ -32,7 +32,7 @@ const Footer = ({ nav, cartCount, setNav, cartTotal }) => {
 
   return (
     // ✅ `relative` here is the key fix — lets the absolute cart strip anchor correctly
-    <div className="fixed bottom-0 w-full max-w-sm bg-white/95 backdrop-blur border-t border-gray-100 shadow-lg z-40 relative flex justify-around px-0 pt-2.5 pb-6">
+    <div className="fixed bottom-0 w-full bg-white/95 backdrop-blur border-t border-gray-100 shadow-lg z-40 relative flex justify-around px-0 pt-2.5 pb-6">
       
       {[
         { key: "home",    label: "Home",    Icon: HomeIcon,   pageLink: '/'        },
