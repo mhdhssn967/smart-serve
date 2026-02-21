@@ -62,6 +62,7 @@ export default function CartPage({ cart: initialCart = [], onCartUpdate }) {
   const total = subtotal + tax + PLATFORM_FEE + DELIVERY;
 
   const placeOrder = async () => {
+    navigator.vibrate([200, 100, 200]);
     if (cart.length === 0) return;
 
     // Build the SweetAlert2 HTML
