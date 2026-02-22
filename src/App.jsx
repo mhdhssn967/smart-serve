@@ -17,8 +17,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/homescreen" element={<RestaurantHome setCartCount={setCartCount} setCartTotal={setCartTotal} cart={cart} setCart={setCart}/>} />
-        <Route path="/" element={<ScrollFoodCourt/>} />
+        <Route path="/" element={<RestaurantHome setCartCount={setCartCount} setCartTotal={setCartTotal} cart={cart} setCart={setCart}/>} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/cart" element={<CartPage cart={cart}/>} />
       </Routes>
