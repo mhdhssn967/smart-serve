@@ -231,6 +231,7 @@ export default function RestaurantHome({ setCartCount, setCartTotal, cart, setCa
   }, [searchOpen]);
 
   const addToCart = (item) => {
+    navigator.vibrate(15)
     setCart(c => {
       const ex = c.find(x => x.id === item.id);
       return ex ? c.map(x => x.id === item.id ? { ...x, qty: x.qty + 1 } : x) : [...c, { ...item, qty: 1 }];
@@ -240,6 +241,7 @@ export default function RestaurantHome({ setCartCount, setCartTotal, cart, setCa
   };
 
   const decrementCart = (id) => {
+    navigator.vibrate(15)
     setCart(c => c.map(x => x.id === id ? { ...x, qty: x.qty - 1 } : x).filter(x => x.qty > 0));
   };
 
@@ -313,8 +315,13 @@ export default function RestaurantHome({ setCartCount, setCartTotal, cart, setCa
                 <span className="w-2 h-2 rounded-full bg-green-500 shadow-sm shadow-green-300" />
                 <span className="text-green-600 text-xs font-semibold tracking-widest uppercase">Open Now</span>
               </div>
-              <h1 className="font-display text-xl font-semibold text-gray-900 leading-tight">Zara Kerala Kitchen</h1>
-              <p className="text-xs text-gray-400 mt-0.5">Marine Drive, Kochi</p>
+              <div className="flex gap-1 items-center">
+                <img width={"40px"} className="rounded-xl" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_vsuAjpDQesDbTzNFeR80EpYH3VOYu07yhQ&s" alt="" />
+                <div>
+                  <h1 className="font-display text-xl font-semibold text-gray-900 leading-tight">Avi Express</h1>
+                  <p className="text-xs text-gray-400 mt-0.5">Kakkanad, Kochi</p>
+                </div>
+              </div>
             </div>
             <div className="bg-orange-100 border border-orange-200 rounded px-2 py-2 text-center">
                 <p className="text-orange-500 font-bold tracking-widest uppercase mb-0.5" style={{fontSize:'8px'}}>Table</p>

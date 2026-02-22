@@ -148,6 +148,7 @@ export default function CartPage({ cart: initialCart = [], onCartUpdate }) {
       onCartUpdate?.([]);
       setOrderPlaced(true);
       setTimeout(() => setOrderPlaced(false), 4000);
+      navigator.vibrate([100,100,100,100])
     }
   };
 

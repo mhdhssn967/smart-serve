@@ -5,6 +5,7 @@ import Footer from "./components/Footer"
 import { useState } from "react"
 import CartPage from "./pages/CartPage"
 import QuickActions from "./components/QuickActions"
+import ScrollFoodCourt from "./pages/Scrollfoodcourt"
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<RestaurantHome setCartCount={setCartCount} setCartTotal={setCartTotal} cart={cart} setCart={setCart}/>} />
+        <Route path="/homescreen" element={<RestaurantHome setCartCount={setCartCount} setCartTotal={setCartTotal} cart={cart} setCart={setCart}/>} />
+        <Route path="/" element={<ScrollFoodCourt/>} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/cart" element={<CartPage cart={cart}/>} />
       </Routes>

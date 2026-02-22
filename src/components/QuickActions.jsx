@@ -56,6 +56,7 @@ const QuickActions = () => {
   };
 
   const handleWater = async () => {
+    navigator.vibrate(60)
     setOpen(false);
 
     const confirmed = await confirmAction(
@@ -81,6 +82,7 @@ const QuickActions = () => {
   };
 
   const handleBill = async () => {
+    navigator.vibrate(60)
     setOpen(false);
 
     const confirmed = await confirmAction(
@@ -106,6 +108,7 @@ const QuickActions = () => {
   };
 
   const handleWaiterSubmit = async () => {
+    
     setWaiterModal(false);
 
     const items = selectedTags.length > 0 ? selectedTags.join(', ') : null;
@@ -141,7 +144,7 @@ const QuickActions = () => {
       label: "Call Waiter",
       icon: <BellRing size={18} className="text-orange-500" />,
       bg: "bg-orange-50 border-orange-100",
-      onClick: () => { setOpen(false); setWaiterModal(true); },
+      onClick: () => { setOpen(false); setWaiterModal(true); navigator.vibrate(60); },
     },
     {
       label: "Request Bill",
